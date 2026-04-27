@@ -8,20 +8,33 @@ from typing import List, Optional
 class Stock(BaseModel):
     id: int
     name: str
-    cost: float = Field(..., gt=0, description="Cost / investment required")
-    expected_return: float = Field(..., gt=0, description="Expected return value")
-    risk: float = Field(..., gt=0, description="Risk score (lower is safer)")
+    cost: float = Field(..., gt=0)
+    expected_return: float = Field(..., gt=0)
+    risk: float = Field(..., gt=0)
     sector: Optional[str] = "General"
+    volatility: Optional[float] = None
+    sharpe_ratio: Optional[float] = None
 
 
 class RunRequest(BaseModel):
     stocks: List[Stock]
-    budget: float = Field(..., gt=0, description="Total budget (W)")
-    risk_limit: float = Field(..., gt=0, description="Maximum total risk (R)")
-    algorithm: str = Field(
-        ...,
-        description="One of: brute | greedy | dp | bnb | modified_dp",
-    )
+    budget: float = Field(..., gt=0)
+    risk_limit: float = Field(..., gt=0)
+    algorithm: str = Field(..., description="brute | greedy | dp | bnb | modified_dp")
+
+
+class LivePortfolioRequest(BaseModel):
+    symbols: List[str]
+    budget: float = Field(..., gt=0)
+    risk_limit: float = Field(..., gt=0)
+    algorithm: str = Field(default="modified_dp")
+    compare_all: bool = Field(default=False)
+
+
+class EfficientFrontierRequest(BaseModel):
+    stocks: List[Stock]
+    budget: float = Field(..., gt=0)
+    samples: int = Field(default=50, ge=10, le=150)
 
 
 class RunResponse(BaseModel):
@@ -29,11 +42,14 @@ class RunResponse(BaseModel):
     total_return: float
     total_cost: float
     total_risk: float
-    execution_time: float  # in milliseconds
+    execution_time: float
     is_optimal: bool
     algorithm: str
-    nodes_explored: Optional[int] = None  # for B&B
-    dp_table_size: Optional[int] = None   # for DP
+    sharpe_ratio: Optional[float] = None
+    budget_utilization: Optional[float] = None
+    risk_utilization: Optional[float] = None
+    nodes_explored: Optional[int] = None
+    dp_table_size: Optional[int] = None
 
 
 class AlgorithmResult(BaseModel):
@@ -45,7 +61,10 @@ class AlgorithmResult(BaseModel):
     total_risk: float
     execution_time: float
     is_optimal: bool
-    optimality_gap: float = 0.0   # percentage difference from optimal
+    optimality_gap: float = 0.0
+    sharpe_ratio: Optional[float] = None
+    budget_utilization: Optional[float] = None
+    risk_utilization: Optional[float] = None
     nodes_explored: Optional[int] = None
 
 

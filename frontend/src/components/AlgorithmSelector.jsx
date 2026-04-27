@@ -76,10 +76,10 @@ export default function AlgorithmSelector({ selected, setSelected }) {
             <button
               key={algo.key}
               onClick={() => setSelected(algo.key)}
-              className={`relative p-3.5 rounded-xl border text-left transition-all duration-200 cursor-pointer
+              className={`relative p-3.5 rounded-xl border text-left transition-all duration-200 cursor-pointer algo-card
                 ${isSelected
                   ? `${algo.bg} ${algo.border} ${algo.highlight ? 'ring-1 ring-emerald-500/50' : ''}`
-                  : 'bg-dark-900/50 border-dark-600/50 hover:bg-dark-700/50 hover:border-dark-500'}
+                  : 'algo-card-idle'}
               `}
             >
               {algo.highlight && isSelected && (
@@ -109,10 +109,10 @@ export default function AlgorithmSelector({ selected, setSelected }) {
       </div>
 
       {current && (
-        <div className={`mt-3 p-3 rounded-xl ${current.bg} border ${current.border} text-xs`}>
-          <span className="text-slate-400">Selected: </span>
+        <div className="mt-3 p-3 rounded-xl text-xs algo-info-bar">
+          <span className="algo-info-label">Selected: </span>
           <span className={`font-semibold ${current.color}`}>{current.label}</span>
-          <span className="text-slate-500 ml-2">— {current.desc}</span>
+          <span className="algo-info-desc ml-2">— {current.desc}</span>
         </div>
       )}
     </div>

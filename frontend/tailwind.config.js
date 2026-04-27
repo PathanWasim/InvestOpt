@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -41,28 +42,22 @@ export default {
         },
       },
       animation: {
-        'fade-in': 'fadeIn 0.4s ease-out',
-        'slide-up': 'slideUp 0.5s ease-out',
+        'fade-in': 'fadeIn 0.35s ease-out both',
+        'slide-up': 'slideUp 0.45s ease-out both',
+        'slide-in': 'slideIn 0.35s ease-out both',
         'pulse-slow': 'pulse 3s infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
+        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        slideUp: { '0%': { opacity: '0', transform: 'translateY(16px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        slideIn: { '0%': { opacity: '0', transform: 'translateX(-12px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
         glow: {
-          '0%': { boxShadow: '0 0 5px rgba(16, 185, 129, 0.3)' },
-          '100%': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.6)' },
+          '0%': { boxShadow: '0 0 5px rgba(16,185,129,0.3)' },
+          '100%': { boxShadow: '0 0 20px rgba(16,185,129,0.6)' },
         },
       },
-      backdropBlur: {
-        xs: '2px',
-      },
+      backdropBlur: { xs: '2px' },
     },
   },
   plugins: [],

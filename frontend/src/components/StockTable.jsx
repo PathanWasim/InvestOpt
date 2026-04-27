@@ -35,7 +35,7 @@ export default function StockTable({ stocks, setStocks }) {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="section-title">Stock Universe</h2>
-          <p className="text-xs text-slate-500 mt-0.5">{stocks.length} stock{stocks.length !== 1 ? 's' : ''} loaded</p>
+          <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>{stocks.length} stock{stocks.length !== 1 ? 's' : ''} loaded</p>
         </div>
         <button onClick={addRow} className="btn-secondary text-xs gap-1.5">
           <Plus size={14} />
@@ -43,9 +43,9 @@ export default function StockTable({ stocks, setStocks }) {
         </button>
       </div>
 
-      <div className="table-scroll rounded-xl overflow-hidden border border-dark-600/50">
+      <div className="table-scroll rounded-xl overflow-hidden card-table-wrap">
         <table className="data-table">
-          <thead className="sticky top-0 bg-dark-800">
+          <thead className="sticky top-0">
             <tr>
               <th>#</th>
               <th>Ticker</th>
@@ -133,7 +133,7 @@ export default function StockTable({ stocks, setStocks }) {
           </tbody>
         </table>
         {stocks.length === 0 && (
-          <div className="text-center py-12 text-slate-500">
+          <div className="text-center py-12 empty-state-text">
             <p className="text-sm">No stocks loaded. Load a dataset or add rows manually.</p>
           </div>
         )}
